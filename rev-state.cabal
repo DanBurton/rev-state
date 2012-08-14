@@ -1,0 +1,21 @@
+Name:                rev-state
+Version:             0.1
+Synopsis:            Reverse State monad transformer
+
+Homepage:            https://github.com/DanBurton/rev-state#readme
+License:             BSD3
+License-file:        LICENSE
+Author:              Dan Burton
+Maintainer:          danburton.email@gmail.com
+
+Category:            Control
+Build-type:          Simple
+Cabal-version:       >=1.2
+
+
+Library
+  Exposed-modules:     Control.Monad.Trans.RevState
+                     , Control.Monad.RevState.Class
+                     , Control.Monad.RevState
+  
+  Build-depends:       base==4.*, mtl==2.*
