@@ -69,6 +69,12 @@ instance Monad m => Functor (RevStateT s m) where
   -- so we don't have to rely on m being MonadFix
   fmap f m = RevStateT $ \s -> first f `liftM` runStateT m s
 
+
+instance MonadFix m => MonadFix (RevStateT s m) where
+  mfix f = RevStateT $ \s -> do
+    rec x <- runStateT (f x) s
+    return x
+
 get :: Monad m => RevStateT s m s
 get = state $ \s -> (s, s)
 
