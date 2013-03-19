@@ -1,6 +1,8 @@
 Name:                rev-state
 Version:             0.1
 Synopsis:            Reverse State monad transformer
+Description:         It's like the State monad transformer.
+                     But Reversed! The state goes backwards.
 
 Homepage:            https://github.com/DanBurton/rev-state#readme
 License:             BSD3
@@ -10,7 +12,7 @@ Maintainer:          danburton.email@gmail.com
 
 Category:            Control
 Build-type:          Simple
-Cabal-version:       >=1.2
+Cabal-version:       >=1.6
 
 
 Library
