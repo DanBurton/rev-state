@@ -1,4 +1,6 @@
 rev-state
 =========
 
-Reverse State monad transformer
+Reverse State monad transformer.
+
+(Import it qualified to avoid confusion.)
