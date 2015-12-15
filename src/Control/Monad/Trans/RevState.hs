@@ -72,7 +72,7 @@ instance Monad m => Functor (StateT s m) where
 
 instance MonadFix m => MonadFix (StateT s m) where
   mfix f = StateT $ \s ->
-    mfix (\(x, _) -> runStateT (f x) s)
+    mfix (\ ~(x, _) -> runStateT (f x) s)
 
 
 get :: Monad m => StateT s m s

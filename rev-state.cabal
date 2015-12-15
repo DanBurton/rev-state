@@ -1,5 +1,5 @@
 Name:                rev-state
-Version:             0.1
+Version:             0.1.1
 Synopsis:            Reverse State monad transformer
 Description:         It's like the State monad transformer.
                      But Reversed! The state goes backwards.
@@ -12,12 +12,18 @@ Maintainer:          danburton.email@gmail.com
 
 Category:            Control
 Build-type:          Simple
-Cabal-version:       >=1.6
+Cabal-version:       >=1.8
 
 
 Library
+  Hs-Source-Dirs:      src
   Exposed-modules:     Control.Monad.Trans.RevState
                      , Control.Monad.RevState.Class
                      , Control.Monad.RevState
-  
   Build-depends:       base==4.*, mtl==2.*
+
+Test-Suite rev-state-test
+  Hs-Source-Dirs: test
+  Main-Is:        Main.hs
+  Type:           exitcode-stdio-1.0
+  Build-Depends:  base, rev-state
