@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -Wall #-}
-{-# LANGUAGE DoRec #-}
+{-# LANGUAGE RecursiveDo #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE FunctionalDependencies #-}
 {-# LANGUAGE FlexibleInstances #-}
@@ -10,14 +10,15 @@ module Control.Monad.RevState.Class
   , gets
   ) where
 
-import Control.Applicative (Applicative)
 import Control.Monad (liftM)
 import Control.Monad.Fix (MonadFix)
 
 import qualified Control.Monad.Trans.RevState as Rev
 
 
-class (Applicative m, MonadFix m) => MonadRevState s m | m -> s where
+class (MonadFix m) => MonadRevState s m | m -> s where
+  {-# MINIMAL get, put | state #-}
+
   get :: m s
   get = state $ \s -> (s, s)
 
