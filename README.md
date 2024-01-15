@@ -1,7 +1,7 @@
 rev-state
 =========
 
-![travis build status](https://travis-ci.org/DanBurton/rev-state.svg?branch=master)
+![travis build status](https://github.org/DanBurton/rev-state/actions/workflows/haskell.yml/badge.svg?branch=master)
 
 Reverse State monad transformer.
 
