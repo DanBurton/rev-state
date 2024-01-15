@@ -1,9 +1,6 @@
 {-# OPTIONS_GHC -Wall #-}
 {-# LANGUAGE RecursiveDo #-}
 {-# LANGUAGE TupleSections #-}
-{-# LANGUAGE QuantifiedConstraints #-}
-{-# LANGUAGE FlexibleContexts #-}
-{-# LANGUAGE UndecidableInstances #-}
 
 module Control.Monad.Trans.RevState
   ( -- * Monad Transformer
@@ -13,6 +10,7 @@ module Control.Monad.Trans.RevState
   , execStateT
   , mapStateT
   , withStateT
+  , liftStateT
 
     -- * Monad
   , State
@@ -34,7 +32,6 @@ import Control.Arrow (first)
 import Control.Monad
 import Control.Monad.Fix
 import Control.Monad.Identity
-import Control.Monad.Trans
 
 
 newtype StateT s m a = StateT
@@ -57,11 +54,11 @@ evalState m s = fst $ runState m s
 execState :: State s a -> s -> s
 execState m s = snd $ runState m s
 
--- I don't know how to properly express that
--- StateT s is only a valid MonadTrans if m is MonadFix
--- This probably doesn't work; PRs are open
-instance (forall m. Monad (StateT s m)) => MonadTrans (StateT s) where
-  lift m = StateT $ \s -> fmap (,s) m
+-- we can't declare StateT as an instance of MonadTrans
+-- because ghc >= 9.6 requires (forall m. Monad m => Monad (StateT s m))
+-- but we need (MonadFix m) to guarantee that (StateT s m) is a Monad
+liftStateT :: Functor m => m a -> StateT s m a
+liftStateT m = StateT $ \s -> fmap (,s) m
 
 instance MonadFix m => Monad (StateT s m) where
   m >>= f = StateT $ \s -> do
